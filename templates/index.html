@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        textarea,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #eeeeee;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Caesar Cipher</h1>
+
+    <p>
+        Encrypt or decrypt text using a configurable Caesar cipher shift.
+    </p>
+
+    <form method="POST">
+        {% if error %}
+    <div class="result">
+        <strong>Error:</strong>
+        <p>{{ error }}</p>
+    </div>
+{% endif %}
+
+        <label for="text">Text:</label>
+        <textarea
+            id="text"
+            name="text"
+            placeholder="Enter your text..."
+            required
+        >{{ text }}</textarea>
+
+        <label for="shift">Shift value:</label>
+        <input
+            type="number"
+            id="shift"
+            name="shift"
+            placeholder="Example: 3"
+            value="{{ shift }}"
+            required
+        >
+
+        <button type="submit" name="mode" value="encrypt">
+            Encrypt
+        </button>
+
+        <button type="submit" name="mode" value="decrypt">
+            Decrypt
+        </button>
+
+    </form>
+
+    {% if result %}
+        <div class="result">
+            <strong>
+                {% if mode == "encrypt" %}
+                    Encrypted text:
+                {% else %}
+                    Decrypted text:
+                {% endif %}
+            </strong>
+
+            <p>{{ result }}</p>
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
